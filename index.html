@@ -11,5 +11,25 @@
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
     </p>
+    <script>
+        /* create a dropdown and connect it to a fetch api */
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.github.com/users/james-priest/repos');
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    var repos = JSON.parse(xhr.responseText);
+    var select = document.createElement('select');
+    select.setAttribute('id', 'repos');
+    for (var i = 0; i < repos.length; i++) {
+      var option = document.createElement('option');
+      option.setAttribute('value', repos[i].id);
+      option.innerHTML = repos[i].name;
+      select.appendChild(option);
+    }
+    document.body.appendChild(select);
+  }
+};
+xhr.send();
+    </script>
 </body>
 </html>
